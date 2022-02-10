@@ -231,21 +231,22 @@ class app:
 
         nameTitle = Label(self.frame5, text='Name of Homework').grid(row=0, column=0, sticky=W)
         dueTitle = Label(self.frame5, text='Due Date').grid(row=0, column=1, sticky=W)
+        try:
+            for i in self.data.each():
+                
+                self.nameData = Label(self.frame5, text=i.val()["name"])
+                self.dateData = Label(self.frame5, text=i.val()["date"])
+                self.editBn = Button(self.frame5, text='Edit', command=lambda j=i: self.editData(j.key(), j.val()["name"], j.val()["timeTaken"], j.val()["date"]))
+                self.deleteBn = Button(self.frame5, text='Delete', command=lambda: self.deleteData(j.key(), j.val()["name"]))
 
-        for i in self.data.each():
+                self.nameData.grid(row = rowCounter, column = 0, sticky = E)
+                self.dateData.grid(row = rowCounter, column = 1, sticky = E)
+                self.editBn.grid(row = rowCounter, column = 2, sticky = EW)
+                self.deleteBn.grid(row = rowCounter, column = 3, sticky = EW)
             
-            self.nameData = Label(self.frame5, text=i.val()["name"])
-            self.dateData = Label(self.frame5, text=i.val()["date"])
-            self.editBn = Button(self.frame5, text='Edit', command=lambda: self.editData(i.key(), i.val()["name"], i.val()["timeTaken"], i.val()["date"]))
-            self.deleteBn = Button(self.frame5, text='Delete', command=lambda: self.deleteData(i.key(), i.val()["name"]))
-
-            self.nameData.grid(row = rowCounter, column = 0, sticky = E)
-            self.dateData.grid(row = rowCounter, column = 1, sticky = E)
-            self.editBn.grid(row = rowCounter, column = 2, sticky = EW)
-            self.deleteBn.grid(row = rowCounter, column = 3, sticky = EW)
-            
-            rowCounter += 1
-        
+                rowCounter += 1
+        except:
+            pass
         backBn = Button(self.frame5, text='Back', command=self.home).grid(row=rowCounter, column=0, sticky=W)
         backBn.grid(row=rowCounter, column=1, sticky=W)
 
